@@ -1,0 +1,44 @@
+name: Test and publish
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm test
+      - run: npm run demo > /tmp/webhook-simulated-report.json
+      - run: npm run build
+      - run: node --check dist/app.mjs && node --check dist/simulate.mjs
+      - name: Refuse remote execution and scripts
+        run: |
+          grep -Fq "connect-src 'none'" dist/index.html
+          if grep -Ein '<script[^>]+src="https?://' dist/index.html; then exit 1; fi
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment: github-pages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm run build
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - uses: actions/deploy-pages@v4

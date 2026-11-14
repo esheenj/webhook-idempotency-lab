@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0c1514">
+<meta name="description" content="Explore webhook retries, idempotency keys, concurrent conflicts, payload mismatches and TTL expiry in a safe offline browser lab.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; font-src 'none'; img-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Webhook Idempotency Lab — Esheen Labs</title>
+<link rel="stylesheet" href="./style.css"><script type="module" src="./app.mjs"></script>
+</head><body>
+<a class="skip" href="#workbench">Skip to simulator</a>
+<div class="wrap">
+<header class="top">
+<a class="brand" href="https://github.com/esheenj/webhook-idempotency-lab"><span class="mark">Σ</span><span>SIGMA <b>/ LABS</b><small>OPEN INTELLIGENCE</small></span></a>
+<div class="top-right"><span class="alive"></span> LOCAL TEST ENVIRONMENT <span class="edition">OSS / 015</span></div>
+</header>
+<main>
+<section class="hero">
+<div class="eyebrow"><span class="line"></span> INTEGRATION RESILIENCE / 001</div>
+<h1>One request.<br><em>One intended effect.</em></h1>
+<p>Retries are inevitable. Duplicate side effects aren't. Rehearse the decisions your webhook or API handler should consider before accepting, blocking, or replaying a request.</p>
+<div class="traits"><span>NO REAL WEBHOOKS</span><span>NO SERVER REQUIRED</span><span>EXPLAINABLE RESPONSES</span></div>
+</section>
+<section class="work" id="workbench" aria-labelledby="work-title">
+<div class="section-head"><div><span class="overline">01 / EVENT JOURNAL</span><h2 id="work-title">Replay an integration</h2></div><button id="reset" class="quiet" type="button">Restore example ↗</button></div>
+<div class="editor"><div class="editor-top"><label for="source">Scenario JSON</label><span>POLICY + ORDERED EVENTS</span></div>
+<textarea spellcheck="false" id="source" aria-describedby="editor-note"></textarea>
+<div class="editor-actions"><p id="editor-note">Edit fictional delivery events, retries and completion results. No network requests or execution occur. Limit 1 MiB.</p><button id="run" class="primary" type="button">Evaluate scenario <span aria-hidden="true">→</span></button></div>
+</div>
+</section>
+<section class="result" aria-labelledby="result-title">
+<div class="section-head"><div><span class="overline">02 / DECISION REPORT</span><h2 id="result-title">Idempotency outcomes</h2></div><span id="state" class="state" role="status" aria-live="polite">READY</span></div>
+<div class="metrics"><div><span>EVENTS</span><strong id="events">—</strong></div><div><span>ADMITTED</span><strong id="admitted">—</strong></div><div><span>COMPLETED</span><strong id="completed">—</strong></div><div><span>REPLAYED</span><strong id="replayed">—</strong></div><div><span>HELD / REJECTED</span><strong id="held">—</strong></div></div>
+<p id="summary" class="summary">Run the sample to explore first requests, in-flight conflicts, saved completion results and payload reuse errors.</p>
+<div class="table-label"><span>EVENT / KEY</span><span>SIMULATED HTTP OUTCOME</span></div>
+<ol class="decisions" id="decisions" aria-live="polite"></ol>
+<div class="result-foot"><span>NO ACTUAL DELIVERY · NO ACTUAL SIDE EFFECT</span><button id="download" class="quiet" type="button" disabled>Export JSON evidence ↓</button></div>
+</section>
+<section class="boundary"><div><span class="overline">03 / THE IMPORTANT DISTINCTION</span><h2>Simulated is not enforced.</h2></div><p>Production idempotency depends on atomic, durable state shared across workers; a key alone does not provide it. This lab models selected HTTP Idempotency-Key draft behaviors, not provider-specific webhook signatures or production concurrency. Event IDs, signatures, tenant boundaries, retries, TTL and transaction boundaries require actual server enforcement.</p></section>
+</main>
+<footer><span>© 2026 ESHEEN LABS · MIT / ORIGINAL SOFTWARE</span><div><a href="https://datatracker.ietf.org/doc/draft-ietf-httpapi-idempotency-key-header/" rel="noopener noreferrer">HTTPAPI draft</a><a href="https://github.com/esheenj/webhook-idempotency-lab" rel="noopener noreferrer">Source &amp; tests ↗</a></div></footer>
+</div></body></html>

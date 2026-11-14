@@ -1,0 +1,1 @@
+{"name":"webhook-idempotency-lab","version":"0.1.0","private":true,"type":"module","license":"MIT","engines":{"node":">=20"},"scripts":{"test":"node --test tests/*.test.mjs","demo":"node src/cli.mjs examples/scenario.json","build":"node scripts/build.mjs"}}
