@@ -28,6 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      actions: read
       pages: write
       id-token: write
     environment: github-pages
@@ -38,7 +39,18 @@ jobs:
           node-version: '20'
       - run: npm run build
       - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: dist
+      - name: Wait for the exact Pages artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for n in $(seq 1 15); do
+            count=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts" --jq '[.artifacts[] | select(.name == "github-pages" and (.expired | not))] | length')
+            if [ "$count" = 1 ]; then exit 0; fi
+            sleep 2
+          done
+          echo "Pages artifact did not become visible" >&2
+          exit 1
       - uses: actions/deploy-pages@v4
