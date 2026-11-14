@@ -1,10 +1,20 @@
-# Webhook Idempotency Lab
+# Webhook Retry & Idempotency Lab
 
 **One request. One intended effect.**
 
 An original, dependency-free, MIT-licensed browser and CLI sandbox for investigating idempotency decisions when webhook notifications or HTTP requests are retried. The model is a **deterministic educational simulation**: it never accepts real webhooks, calls an endpoint, performs a payment or triggers a side effect.
 
 **Live demo:** https://esheenj.github.io/webhook-idempotency-lab/
+
+## Product purpose
+
+**Webhook Retry & Idempotency Lab** is the public display name for this small offline simulation of webhook and HTTP retry decisions. It is part of Sigma Code's **Integration Reliability Tools** collection.
+
+**For:** API engineers, CRM implementers, technical agencies and QA teams. **Input:** invented ordered events plus an illustrative idempotency policy. **Output:** inspectable simulated decisions showing how key reuse, payload conflicts, in-flight requests and expiry can affect duplicate-handling.
+
+**Commercial pathway:** the free MIT example can help frame a scoped webhook-review or test-implementation enquiry via [Sigma Code](mailto:info@sigmacode.co.za?subject=Webhook%20retry%20and%20idempotency%20review). No paid service or customer outcome is asserted.
+
+**Boundary:** there is no real webhook receiver, persistent state, signature verification, concurrent transactional processing or production guarantee. The repository slug, CLI and package name are unchanged.
 
 ## Run locally
 
